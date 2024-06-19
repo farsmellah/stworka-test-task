@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>stworka layout</title>
+
+    <style>
+      /* сброс */
+      p {
+        all: unset;
+      }
+
+      button {
+        all: unset;
+        cursor: pointer;
+      }
+
+      /* переменные */
+      :root {
+        /* палитра */
+        --text-primary: #fff;
+        --text-accent: #4777ed;
+
+        --bg-primary: #3579f5;
+        --bg-accent-dark: #2364db;
+        --bg-accent-light: #f4f8ff;
+
+        --progress-bar-empty: #ffffff80;
+        --progress-bar-filled: #fff;
+
+        /* переменные окружностей прогрессбара */
+        --size: 64px;
+        --half-size: calc(var(--size) / 2);
+        --stroke-width: 1px;
+        --radius: calc((var(--size) - var(--stroke-width)) / 2);
+        --circumference: calc(var(--radius) * pi * 2);
+        --dash: calc((var(--progress) * var(--circumference)) / 100);
+        --progress: 5;
+
+        font-family: "Inter", sans-serif;
+      }
+
+      circle {
+        cx: var(--half-size);
+        cy: var(--half-size);
+        r: var(--radius);
+        stroke-width: var(--stroke-width);
+        fill: none;
+        stroke-linecap: round;
+      }
+
+      circle.bg {
+        stroke: var(--progress-bar-empty);
+      }
+
+      circle.fg {
+        stroke: var(--progress-bar-filled);
+        transform: rotate(-90deg);
+        transform-origin: var(--half-size) var(--half-size);
+        stroke-dasharray: var(--dash) calc(var(--circumference) - var(--dash));
+        stroke: var(--progress-bar-filled);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div
+      style="
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      "
+    >
+      <div
+        style="
+          background-color: var(--bg-primary);
+          min-width: 743px;
+          padding: 12px 18px;
+          align-items: center;
+          border-radius: 10px;
+        "
+      >
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          "
+        >
+          <div
+            style="
+              display: flex;
+              gap: 16px;
+              align-items: center;
+              color: var(--text-primary);
+            "
+          >
+            <div
+              style="
+                position: relative;
+                width: var(--size);
+                height: var(--size);
+              "
+            >
+              <svg width="var(--size)" height="var(--size)">
+                <circle class="bg"></circle>
+                <circle class="fg"></circle>
+              </svg>
+              <div
+                style="
+                  position: absolute;
+                  top: 50%;
+                  left: 50%;
+                  transform: translate(-50%, -50%);
+                  font-size: 20px;
+                "
+              >
+                0/7
+              </div>
+            </div>
+            <div style="display: flex; flex-flow: column; gap: 4px">
+              <p
+                style="
+                  font-size: 12px;
+                  padding: 0 10px;
+                  background-color: var(--bg-accent-dark);
+                  width: fit-content;
+                  border-radius: 40px;
+                "
+              >
+                Чеклист
+              </p>
+              <p style="font-size: 16px; font-weight: 600">
+                Выполнено: 0 из 7 действий
+              </p>
+              <p style="font-size: 12px">
+                Следующее действие: Созвониться с клиентом до 23.05.24 12:00
+              </p>
+            </div>
+          </div>
+
+          <button
+            style="
+              background-color: var(--bg-accent-light);
+              color: var(--text-accent);
+              font-size: 14px;
+              padding: 10px 25px;
+              border-radius: 6px;
+              height: fit-content;
+            "
+          >
+            Открыть чеклист
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
